@@ -2,10 +2,9 @@ package org.example.backend.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.backend.model.Product;
-import org.example.backend.repository.ProductRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.backend.model.ProductDto;
+import org.example.backend.service.ProductService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,10 +13,15 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductController {
 
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @GetMapping
     public List<Product> getAll() {
-        return productRepository.findAll();
+        return productService.getProducts();
+    }
+
+    @PostMapping
+    public Product addProduct(@RequestBody ProductDto productDto) {
+        return productService.add(productDto);
     }
 }
