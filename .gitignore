@@ -10,3 +10,7 @@
 /backend/mvnw.cmd
 
 ##Frontend
+/frontend/node_modules/
+/frontend/dist/
+/frontend/dist-ssr/
+/frontend/npm-debug.log*
