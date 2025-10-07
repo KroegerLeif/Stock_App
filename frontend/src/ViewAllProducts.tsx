@@ -2,8 +2,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import DeleteButton from "./DeleteButton.tsx";
 import type {Product} from "./Product.ts";
-import DeleteButton from "./DeleteButton.tsx";
-import type {Product} from "./Product.ts";
 
 type Product ={
     id : string;
