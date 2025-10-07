@@ -1,15 +1,17 @@
 package org.example.backend.service;
 
+import org.example.backend.expetion.ProductNotFoundException;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class ProductServiceTest {
 
