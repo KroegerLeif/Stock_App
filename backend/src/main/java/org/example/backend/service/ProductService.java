@@ -23,4 +23,15 @@ public class ProductService {
         productRepository.save(product);
         return product;
     }
+
+    public Product updateProduct(String id, ProductDto productDto) {
+        return productRepository.findById(id)
+                .map(existingProduct -> {
+                    existingProduct = existingProduct .withName(productDto.name())
+                            .withDescription(productDto.description())
+                            .withStock(productDto.stock())
+                            .withPrice(productDto.price());
+                    return productRepository.save(existingProduct); })
+                .orElse(null);
+    }
 }
