@@ -1,9 +1,17 @@
 import {useEffect, useState} from "react";
-import  axios from "axios";
+import axios from "axios";
+import DeleteButton from "./DeleteButton.tsx";
 import type {Product} from "./Product.ts";
 import DeleteButton from "./DeleteButton.tsx";
 import type {Product} from "./Product.ts";
 
+type Product ={
+    id : string;
+    name : string;
+    description : string;
+    stock : number;
+    price : number
+}
 export default function ViewAllProducts(){
 
     const [productsList, setProductsList] = useState<Product[]>([]);
