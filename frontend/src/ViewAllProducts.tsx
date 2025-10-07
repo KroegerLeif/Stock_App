@@ -33,6 +33,7 @@ export default function ViewAllProducts(){
                         <p><strong>Name:</strong> {char.name}</p>
                         <p><strong>Description:</strong> {char.description}</p>
                         <p><strong>price:</strong> {char.price}</p>
+                        <DeleteButton productId={char.id} onDeleted={() => setProductsList(productsList.filter(product => product.id !== char.id))} />
                     </div>
                 ))
             )}
