@@ -26,8 +26,18 @@ public class ProductController {
         return productService.add(productDto);
     }
 
-    @GetMapping
-    public ProductResponse findProductById(){
-        return null;
+    @GetMapping("/{id}")
+    public ProductResponse findProductById(@PathVariable String id ){
+        return mapProductToResponse(
+                productService.findProductById(id)
+        );
+    }
+
+    private ProductResponse mapProductToResponse(Product product){
+        return new ProductResponse(
+                product.name(),
+                product.description(),
+                product.price()
+        );
     }
 }
