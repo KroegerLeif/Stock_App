@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import lombok.AllArgsConstructor;
+import org.example.backend.dto.ProductResponse;
 import org.example.backend.model.Product;
 import org.example.backend.repository.ProductRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,5 +20,10 @@ public class ProductController {
     @GetMapping
     public List<Product> getAll() {
         return productRepository.findAll();
+    }
+
+    @GetMapping
+    public ProductResponse findProductById(){
+        return null;
     }
 }
