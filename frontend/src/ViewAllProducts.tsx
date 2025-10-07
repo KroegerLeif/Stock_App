@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import  axios from "axios";
 import type {Product} from "./Product.ts";
+import {Link} from "react-router-dom";
 
 export default function ViewAllProducts(){
 
@@ -20,11 +21,15 @@ export default function ViewAllProducts(){
                 <p>Keine Produkte gefunden.</p>
             ) : (
                 productsList.map((char) => (
-                    <div key={char.id} className="todo-item">
+                    <div key={char.id} className="product-item">
                         <h3>ID: {char.id}</h3>
                         <p><strong>Name:</strong> {char.name}</p>
                         <p><strong>Description:</strong> {char.description}</p>
-                        <p><strong>price:</strong> {char.price}</p>
+                        <p><strong>Stock:</strong> {char.stock}</p>
+                        <p><strong>Price:</strong> {char.price}</p>
+                        <Link to={`/edit/${char.id}`}>
+                            <button>Edit</button>
+                        </Link>
                     </div>
                 ))
             )}
