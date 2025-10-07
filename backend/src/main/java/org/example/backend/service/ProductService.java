@@ -1,7 +1,6 @@
 package org.example.backend.service;
 
 import org.example.backend.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +13,13 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public void deleteProductById(String id) {
-        productRepository.deleteById(id);
+    public boolean deleteProductById(String id) {
+
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
