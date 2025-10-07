@@ -6,10 +6,14 @@ import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 class ProductServiceTest {
 
@@ -27,6 +31,23 @@ class ProductServiceTest {
         Product product = service.add(productDto);
         //THEN
         assertNotNull(product.id());
+    }
+
+    @Test
+    void updateProduct_ShouldReturnUpdatedProductWithId() {
+        //Given
+        Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
+        ProductDto productDto = new ProductDto("Test", "Test", 10, 4.500);
+        //When
+        Mockito.when(productRepository.findById("1")).thenReturn(Optional.of(product));
+        Mockito.when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        //Method ausführen
+        Product newProduct = service.updateProduct("1", productDto);
+        //Ergebnisse prüfen
+        assertThat(newProduct.stock()).isEqualTo(10);
+        //Verify, dass die richtigen Methoden aufgerufen wurden
+        verify(productRepository).findById("1");
+        verify(productRepository).save(newProduct);
     }
 
 }
