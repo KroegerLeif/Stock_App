@@ -23,4 +23,13 @@ public class ProductService {
         productRepository.save(product);
         return product;
     }
+
+    public boolean deleteProductById(String id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
