@@ -32,9 +32,9 @@ function DetailProductPage(){
         return(
             <>
                 <div className="detail-product">
-                    <h1>{product.productName}</h1>
-                    <p>{product.description}</p>
-                    <p>{product.productPrice}</p>
+                    <h1 className={"product-name"}>{product.productName}</h1>
+                    <p className={"product-description"}>{product.description}</p>
+                    <p className={"product-price"}>{product.productPrice}</p>
                 </div>
             </>
         )
