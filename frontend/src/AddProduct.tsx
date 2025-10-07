@@ -16,7 +16,7 @@ export default function AddProduct() {
     const navigate = useNavigate();
 
     function postProduct(product: Product) {
-        axios.post("/add", product)
+        axios.post("/api/product", product)
             .then(() => {
                 navigate("/")
                 }
@@ -42,20 +42,16 @@ export default function AddProduct() {
             <form onSubmit={handelSubmit}>
 
                 <label htmlFor="name">Name:</label>
-                <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"
-                       placeholder="Name Eingeben"/>
+                <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"/>
 
                 <label htmlFor="description">Beschreibung:</label>
-                <input id="description" value={product.description} onChange={handelInputChange} name={"description"} type="text"
-                       placeholder="Beschreibung Eingeben"/>
+                <input id="description" value={product.description} onChange={handelInputChange} name={"description"} type="text"/>
 
                 <label htmlFor="stock">Lagerbestand:</label>
-                <input id="stock" value={product.stock} onChange={handelInputChange} name={"stock"} type="number"
-                       placeholder="Lagerbestand Eingeben"/>
+                <input id="stock" value={product.stock} onChange={handelInputChange} name={"stock"} type="number"/>
 
                 <label htmlFor="price">Preis:</label>
-                <input id="price" value={product.price} onChange={handelInputChange} name={"price"} type="number"
-                       placeholder="Preis Eingeben"/>
+                <input id="price" value={product.price} onChange={handelInputChange} name={"price"} type="number"/>
 
                 <button type="submit">speichern</button>
 
