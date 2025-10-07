@@ -3,7 +3,7 @@ package org.example.backend.controller;
 import lombok.AllArgsConstructor;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
-import org.example.backend.repository.ProductRepository;
+import org.example.backend.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
