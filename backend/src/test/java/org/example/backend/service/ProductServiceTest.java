@@ -29,4 +29,17 @@ class ProductServiceTest {
         assertNotNull(product.id());
     }
 
+    @Test
+    public void deleteProductById() {
+        Product product = new Product("12345", "name", "description", 10, 10.99);
+
+        Mockito.when(productRepository.save(product)).thenReturn(product);
+        Mockito.when(productRepository.findById("12345")).thenReturn(java.util.Optional.of(product));
+
+        productRepository.deleteById(product.id());
+
+        Mockito.when(productRepository.findById("12345")).thenReturn(java.util.Optional.empty());
+
+        assertTrue(productRepository.findById(product.id()).isEmpty());
+    }
 }
