@@ -4,12 +4,12 @@ import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class ProductServiceTest {
 
@@ -22,7 +22,7 @@ class ProductServiceTest {
         //GIVEN
         ProductDto productDto = new ProductDto("Test", "Test", 10, 5.99);
         String id = UUID.randomUUID().toString();
-        Mockito.when(idService.randomId()).thenReturn(id);
+        when(idService.randomId()).thenReturn(id);
         //WHEN
         Product product = service.add(productDto);
         //THEN
@@ -31,15 +31,15 @@ class ProductServiceTest {
 
     @Test
     public void deleteProductById() {
-        Product product = new Product("12345", "name", "description", 10, 10.99);
+        String id = "12345";
+        Product product = new Product(id, "name", "description", 10, 10.99);
+        when(productRepository.findById(id)).thenReturn(Optional.of(product));
 
-        Mockito.when(productRepository.save(product)).thenReturn(product);
-        Mockito.when(productRepository.findById("12345")).thenReturn(java.util.Optional.of(product));
+        // WHEN
+        service.deleteProductById(id);
 
-        productRepository.deleteById(product.id());
-
-        Mockito.when(productRepository.findById("12345")).thenReturn(java.util.Optional.empty());
-
-        assertTrue(productRepository.findById(product.id()).isEmpty());
+        // THEN
+        verify(productRepository).findById(id);
+        verify(productRepository).deleteById(id);
     }
 }
