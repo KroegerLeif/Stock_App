@@ -43,21 +43,21 @@ export default function AddProduct() {
 
                 <label htmlFor="name">Name:</label>
                 <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"
-                       placeholder="Enter product name"/>
+                       placeholder="Name Eingeben"/>
 
-                <label htmlFor="description">Description:</label>
+                <label htmlFor="description">Beschreibung:</label>
                 <input id="description" value={product.description} onChange={handelInputChange} name={"description"} type="text"
-                       placeholder="Enter product description"/>
+                       placeholder="Beschreibung Eingeben"/>
 
-                <label htmlFor="stock">Stock:</label>
+                <label htmlFor="stock">Lagerbestand:</label>
                 <input id="stock" value={product.stock} onChange={handelInputChange} name={"stock"} type="number"
-                       placeholder="Enter product stock"/>
+                       placeholder="Lagerbestand Eingeben"/>
 
-                <label htmlFor="price">Price:</label>
+                <label htmlFor="price">Preis:</label>
                 <input id="price" value={product.price} onChange={handelInputChange} name={"price"} type="number"
-                       placeholder="Enter product price"/>
+                       placeholder="Preis Eingeben"/>
 
-                <button type="submit">Submit</button>
+                <button type="submit">speichern</button>
 
             </form>
         </div>
