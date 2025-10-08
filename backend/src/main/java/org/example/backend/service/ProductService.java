@@ -48,7 +48,4 @@ public class ProductService {
         }
     }
 
-    public Product findProductById(String id){
-        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Kein Product Gefunden"));
-    }
 }

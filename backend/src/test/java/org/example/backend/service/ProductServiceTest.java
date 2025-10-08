@@ -64,29 +64,5 @@ class ProductServiceTest {
         verify(productRepository).findById(id);
         verify(productRepository).deleteById(id);
     }
-    @Test
-    void findProductById_ShouldReturnProduct_whenProductExists() {
-        // GIVEN
-        String id = "1";
-        Product expectedProduct = new Product(id, "Test Product", "Test Description", 10, 9.99);
-        when(productRepository.findById(id)).thenReturn(Optional.of(expectedProduct));
 
-        // WHEN
-        Product actualProduct = service.findProductById(id);
-
-        // THEN
-        verify(productRepository).findById(id);
-        assertEquals(expectedProduct, actualProduct);
-    }
-
-    @Test
-    void findProductById_ShouldThrowProductNotFoundException_whenProductDoesNotExist() {
-        // GIVEN
-        String id = "non-existent-id";
-        when(productRepository.findById(id)).thenReturn(Optional.empty());
-
-        // WHEN & THEN
-        assertThrows(ProductNotFoundException.class, () -> service.findProductById(id));
-        verify(productRepository).findById(id);
-    }
 }

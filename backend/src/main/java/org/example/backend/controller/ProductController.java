@@ -5,6 +5,7 @@ import org.example.backend.dto.ProductResponse;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.service.ProductService;
+import org.example.backend.service.SearchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final SearchService searchService;
 
     @GetMapping
     public List<Product> getAll() {
@@ -56,7 +58,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductResponse findProductById(@PathVariable String id ){
         return mapProductToResponse(
-                productService.findProductById(id)
+                searchService.findProductById(id)
         );
     }
 
