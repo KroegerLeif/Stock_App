@@ -5,11 +5,13 @@ import AddProduct from "./AddProduct.tsx";
 import DetailProductPage from "./component/DetailProductPage.tsx";
 
 import UpdateProduct from "./UpdateProduct.tsx";
+import MenuBar from "./component/MenuBar.tsx";
 function App() {
 
 
   return (
     <>
+        <MenuBar/>
         <Routes>
             <Route path={"/"} element={<ViewAllProducts/>}/>
             <Route path={"/products/add"} element={<AddProduct/>}/>
