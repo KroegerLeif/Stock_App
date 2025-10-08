@@ -56,20 +56,16 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse findProductById(@PathVariable String id ){
-        return mapProductToResponse(
-                searchService.findProductById(id)
-        );
+    public ProductResponse findProductById(@PathVariable String id) {
+        return mapProductToResponse(searchService.findProductById(id));
     }
 
     @GetMapping("/search/{search}")
     public ProductResponse searchForProduct(@PathVariable String search) {
-        return mapProductToResponse(
-                searchService.findProduct(search)
-        );
+        return mapProductToResponse(searchService.findProduct(search));
     }
 
-    private ProductResponse mapProductToResponse(Product product){
+    private ProductResponse mapProductToResponse(Product product) {
         return new ProductResponse(
                 product.name(),
                 product.description(),
