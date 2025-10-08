@@ -11,7 +11,7 @@ export default function ViewAllProducts() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("/api/product")
+        axios.get("/api/products")
             .then((res) => setProductsList(res.data))
             .catch((err) => console.error("Fehler beim Laden:", err));
     }, []);

@@ -16,7 +16,7 @@ export default function AddProduct() {
     const navigate = useNavigate();
 
     function postProduct(product: Product) {
-        axios.post("/api/product", product)
+        axios.post("/api/products", product)
             .then(() => {
                 navigate("/")
                 }
