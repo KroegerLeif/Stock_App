@@ -1,5 +1,6 @@
 package org.example.backend.controller;
 
+import org.example.backend.dto.ProductResponse;
 import org.example.backend.model.Product;
 import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -100,4 +102,52 @@ class ProductControllerTest {
                                    """
                 ));
     }
+
+    @Test
+    void findProductById_ShouldReturnProduct_whenProductExists() throws Exception {
+        //GIVEN
+        Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
+        productRepository.save(product);
+
+        //WHEN & THEN
+        mockMvc.perform(get("/api/products/{id}", "1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                    {
+                        "name": "Test",
+                        "description": "Test",
+                        "price": 4.500
+                    }
+                """));
+    }
+
+    @Test
+    void findProductById_ShouldReturnNotFound_whenProductDoesNotExist() throws Exception {
+        mockMvc.perform(get("/api/products/{id}", "non-existent-id"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void searchForProduct_ShouldReturnProduct_whenProductExists() throws Exception {
+        //GIVEN
+        Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
+        productRepository.save(product);
+
+        //WHEN & THEN
+        mockMvc.perform(get("/api/products/search/{search}", "Test"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                    {
+                        "name": "Test",
+                        "description": "Test",
+                        "price": 4.500
+                    }"""));
+    }
+
+    @Test
+    void searchForProduct_ShouldReturnNotFound_whenProductDoesNotExist() throws Exception {
+        mockMvc.perform(get("/api/products/search/{search}", "non-existent-name"))
+                .andExpect(status().isNotFound());
+    }
+
 }
