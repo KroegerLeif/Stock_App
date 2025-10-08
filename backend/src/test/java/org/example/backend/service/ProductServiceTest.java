@@ -30,7 +30,7 @@ class ProductServiceTest {
     }
 
     @Test
-    public void deleteProductById() {
+    public void deleteProductById_ShouldDeleteProduct() {
         String id = "12345";
         Product product = new Product(id, "name", "description", 10, 10.99);
         when(productRepository.findById(id)).thenReturn(Optional.of(product));
