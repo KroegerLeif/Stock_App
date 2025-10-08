@@ -112,3 +112,34 @@ button:hover {
 label {
     font-weight: bold;
 }
+
+.menu-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-bar nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-between;
+
+}
+
+.menu-bar nav a {
+    color: black;
+    font-size: 1.5em;
+    padding: 10px;
+}
+
+.search-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.search-bar input{
+    margin: 0;
+}
