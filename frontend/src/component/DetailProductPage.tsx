@@ -21,22 +21,22 @@ function DetailProductPage(){
 
     if(!product){
         return (
-            <>
+
                 <div className="detail-product-loading">
                     <h1>Loading...</h1>
                 </div>
-            </>
+
         )
     }
     else{
         return(
-            <>
+
                 <div className="detail-product">
                     <h1 className={"product-name"}>{product.productName}</h1>
                     <p className={"product-description"}>{product.description}</p>
                     <p className={"product-price"}>{product.productPrice}</p>
                 </div>
-            </>
+
         )
     }
 
