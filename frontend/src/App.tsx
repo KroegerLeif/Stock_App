@@ -2,6 +2,7 @@ import './App.css'
 import {Route, Routes} from "react-router-dom";
 import ViewAllProducts from "./ViewAllProducts.tsx";
 import AddProduct from "./AddProduct.tsx";
+import UpdateProduct from "./UpdateProduct.tsx";
 function App() {
 
 
@@ -10,6 +11,7 @@ function App() {
         <Routes>
             <Route path={"/"} element={<ViewAllProducts/>}/>
             <Route path={"/products/add"} element={<AddProduct/>}/>
+            <Route path="/edit/:id" element={<UpdateProduct />} />
         </Routes>
     </>
   )
