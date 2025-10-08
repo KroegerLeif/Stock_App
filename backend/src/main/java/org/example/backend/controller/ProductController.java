@@ -62,6 +62,13 @@ public class ProductController {
         );
     }
 
+    @GetMapping("/search/{search}")
+    public ProductResponse searchForProduct(@PathVariable String search) {
+        return mapProductToResponse(
+                searchService.findProduct(search)
+        );
+    }
+
     private ProductResponse mapProductToResponse(Product product){
         return new ProductResponse(
                 product.name(),
