@@ -5,12 +5,16 @@ import org.example.backend.dto.ProductResponse;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.service.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 @AllArgsConstructor
 public class ProductController {
 
@@ -24,6 +28,29 @@ public class ProductController {
     @PostMapping
     public Product addProduct(@RequestBody ProductDto productDto) {
         return productService.add(productDto);
+    }
+    @PutMapping("/update/{id}")
+    public Product updateProduct(@PathVariable String id, @RequestBody ProductDto productDto) {
+        Product updatedProduct = productService.updateProduct(id, productDto);
+        if (updatedProduct != null) {
+            return updatedProduct;
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Produkt mit ID " + id + " nicht gefunden"
+            );
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProductById(@PathVariable String id) {
+        boolean deletionSuccessful = productService.deleteProductById(id);
+
+        if (deletionSuccessful){
+            return new ResponseEntity<>("Product with id " + id + " was deleted", HttpStatus.OK);
+        } else  {
+            return new ResponseEntity<>("Product with id " + id + " was not found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{id}")

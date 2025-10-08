@@ -4,6 +4,7 @@ import ViewAllProducts from "./ViewAllProducts.tsx";
 import AddProduct from "./AddProduct.tsx";
 import DetailProductPage from "./component/DetailProductPage.tsx";
 
+import UpdateProduct from "./UpdateProduct.tsx";
 function App() {
 
 
@@ -11,7 +12,8 @@ function App() {
     <>
         <Routes>
             <Route path={"/"} element={<ViewAllProducts/>}/>
-            <Route path={"/add"} element={<AddProduct/>}/>
+            <Route path={"/products/add"} element={<AddProduct/>}/>
+            <Route path="/edit/:id" element={<UpdateProduct />} />
             <Route path={"/products/:id"} element={<DetailProductPage/>}/>
         </Routes>
     </>
