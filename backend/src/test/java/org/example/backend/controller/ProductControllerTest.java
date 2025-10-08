@@ -31,7 +31,7 @@ class ProductControllerTest {
 
     @Test
     void addProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/product")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -51,7 +51,7 @@ class ProductControllerTest {
         Product product = new Product("12345", "Name", "Description", 10, 9.99);
         productRepository.save(product);
 
-        mockMvc.perform(delete("/api/product/{id}", product.id())
+        mockMvc.perform(delete("/api/products/{id}", product.id())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Product with id " + product.id() + " was deleted"));
@@ -64,7 +64,7 @@ class ProductControllerTest {
         //Product created, but not added to database
         Product product = new Product("123456789", "Name", "Description", 10, 9.99);
 
-        mockMvc.perform(delete("/api/product/{id}", product.id())
+        mockMvc.perform(delete("/api/products/{id}", product.id())
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isNotFound())
                         .andExpect(content().string("Product with id " + product.id() + " was not found"));
