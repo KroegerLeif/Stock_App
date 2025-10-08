@@ -1,38 +1,44 @@
 import {useEffect, useState} from "react";
-import  axios from "axios";
+import axios from "axios";
+import DeleteButton from "./DeleteButton.tsx";
 import type {Product} from "./Product.ts";
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-export default function ViewAllProducts(){
+export default function ViewAllProducts() {
 
     const [productsList, setProductsList] = useState<Product[]>([]);
 
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("/api/product")
+        axios.get("/api/products")
             .then((res) => setProductsList(res.data))
             .catch((err) => console.error("Fehler beim Laden:", err));
     }, []);
 
     return (
-        <div className="container">
-            <h1>Produkte Liste</h1>
-            {productsList.length === 0 ? (
-                <p>Keine Produkte gefunden.</p>
-            ) : (
-                productsList.map((char) => (
-                    <div key={char.id} className="product-item">
-                        <h3>ID: {char.id}</h3>
-                        <p><strong>Name:</strong> {char.name}</p>
-                        <p><strong>Description:</strong> {char.description}</p>
-                        <p><strong>Stock:</strong> {char.stock}</p>
-                        <p><strong>Price:</strong> {char.price}</p>
-                        <Link to={`/edit/${char.id}`}>
-                            <button>Edit</button>
-                        </Link>
-                    </div>
-                ))
-            )}
-        </div>
+        <>
+            <button onClick={() => navigate("/products/add")}>Produkt anlegen</button>
+            <div className="container">
+                <h1>Produkte Liste</h1>
+                {productsList.length === 0 ? (
+                    <p>Keine Produkte gefunden.</p>
+                ) : (
+                    productsList.map((char) => (
+                        <div key={char.id} className="product-item">
+                            <p><strong>Name:</strong> {char.name}</p>
+                            <p><strong>Beschreibung:</strong> {char.description}</p>
+                            <p><strong>Lagerbestand:</strong> {char.stock}</p>
+                            <p><strong>Preis:</strong> {char.price} €</p>
+                            <Link to={`/edit/${char.id}`}>
+                                <button>Edit</button>
+                            </Link>
+                            <DeleteButton productId={char.id} onDeleted={() => setProductsList(productsList.filter(product => product.id !== char.id))} />
+                        </div>
+                    ))
+                )}
+            </div>
+        </>
     );
 }

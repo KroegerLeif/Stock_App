@@ -7,6 +7,7 @@ import org.example.backend.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +34,15 @@ public class ProductService {
                             .withPrice(productDto.price());
                     return productRepository.save(existingProduct); })
                 .orElse(null);
+    }
+
+    public boolean deleteProductById(String id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            productRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -13,7 +13,7 @@ export default function UpdateProduct(){
     const [message , setMessage] = useState("")
 
     useEffect(() => {
-        axios.get(`/api/product/${id}`)
+        axios.get(`/api/products/${id}`)
             .then(res => {
                 setName(res.data.name)
                 setDescription(res.data.description)
@@ -25,7 +25,7 @@ export default function UpdateProduct(){
 
     function updateProduct(e: React.FormEvent) {
         e.preventDefault();
-        axios.put(`/api/product/update/${id}`, {
+        axios.put(`/api/products/update/${id}`, {
             name: name,
             description: description,
             stock: stock,
@@ -43,20 +43,20 @@ export default function UpdateProduct(){
         <div className="container">
             <h2>Edit Product</h2>
             <form onSubmit={updateProduct}>
-                <label>Name
+                <label>Name:
                     <input value={name} onChange={(e) => setName(e.target.value)} />
                 </label>
-                <label>Description
+                <label>Beschreibung:
                     <input value={description} onChange={(e) => setDescription(e.target.value)} />
                 </label>
-                <label>Stock
+                <label>Lagerbestand:
                     <input value={stock} type="number" onChange={(e) => setStock(Number(e.target.value))} />
                 </label>
-                <label>Price
+                <label>Preis:
                     <input value={price} type="number" onChange={(e) => setPrice(Number(e.target.value))} />
                 </label>
 
-                <button>Save Changes</button>
+                <button>Änderungen speichern</button>
             </form>
             {message && <p>{message}</p>}
         </div>

@@ -66,6 +66,7 @@ body {
     background-color: #8e44ad;
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 10px 10px 5px 0 rgb(0 0 0 / 15%);
 }
 
 form label {
@@ -105,5 +106,9 @@ button:hover {
 
 .message {
     margin-top: 10px;
+    font-weight: bold;
+}
+
+label {
     font-weight: bold;
 }

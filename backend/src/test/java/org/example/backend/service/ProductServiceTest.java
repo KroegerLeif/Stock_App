@@ -4,15 +4,14 @@ import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 class ProductServiceTest {
@@ -26,7 +25,7 @@ class ProductServiceTest {
         //GIVEN
         ProductDto productDto = new ProductDto("Test", "Test", 10, 5.99);
         String id = UUID.randomUUID().toString();
-        Mockito.when(idService.randomId()).thenReturn(id);
+        when(idService.randomId()).thenReturn(id);
         //WHEN
         Product product = service.add(productDto);
         //THEN
@@ -39,8 +38,8 @@ class ProductServiceTest {
         Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
         ProductDto productDto = new ProductDto("Test", "Test", 10, 4.500);
         //When
-        Mockito.when(productRepository.findById("1")).thenReturn(Optional.of(product));
-        Mockito.when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(productRepository.findById("1")).thenReturn(Optional.of(product));
+        when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
         //Method ausführen
         Product newProduct = service.updateProduct("1", productDto);
         //Ergebnisse prüfen
@@ -50,4 +49,17 @@ class ProductServiceTest {
         verify(productRepository).save(newProduct);
     }
 
+    @Test
+    public void deleteProductById_ShouldDeleteProduct() {
+        String id = "12345";
+        Product product = new Product(id, "name", "description", 10, 10.99);
+        when(productRepository.findById(id)).thenReturn(Optional.of(product));
+
+        // WHEN
+        service.deleteProductById(id);
+
+        // THEN
+        verify(productRepository).findById(id);
+        verify(productRepository).deleteById(id);
+    }
 }
