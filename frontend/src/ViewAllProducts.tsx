@@ -11,7 +11,7 @@ export default function ViewAllProducts() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("/api/product")
+        axios.get("/api/products")
             .then((res) => setProductsList(res.data))
             .catch((err) => console.error("Fehler beim Laden:", err));
     }, []);
@@ -26,10 +26,10 @@ export default function ViewAllProducts() {
                 ) : (
                     productsList.map((char) => (
                         <div key={char.id} className="todo-item">
-                            <h3>ID: {char.id}</h3>
                             <p><strong>Name:</strong> {char.name}</p>
-                            <p><strong>Description:</strong> {char.description}</p>
-                            <p><strong>price:</strong> {char.price}</p>
+                            <p><strong>Beschreibung:</strong> {char.description}</p>
+                            <p><strong>Lagerbestand:</strong> {char.stock}</p>
+                            <p><strong>Preis:</strong> {char.price} €</p>
                             <DeleteButton productId={char.id} onDeleted={() => setProductsList(productsList.filter(product => product.id !== char.id))} />
                         </div>
                     ))
