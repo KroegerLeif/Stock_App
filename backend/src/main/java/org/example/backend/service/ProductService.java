@@ -7,6 +7,7 @@ import org.example.backend.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,8 @@ public class ProductService {
     }
 
     public boolean deleteProductById(String id) {
-        if (productRepository.existsById(id)) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
             productRepository.deleteById(id);
             return true;
         } else {
