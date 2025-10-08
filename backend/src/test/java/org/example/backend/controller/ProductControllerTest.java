@@ -114,6 +114,7 @@ class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
+                        "id": "1",
                         "name": "Test",
                         "description": "Test",
                         "price": 4.500
@@ -138,6 +139,7 @@ class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
+                        "id": "1",
                         "name": "Test",
                         "description": "Test",
                         "price": 4.500

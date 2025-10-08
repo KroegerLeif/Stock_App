@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class ProductMapper {
     public ProductResponse mapProductToResponse(Product product) {
         return new ProductResponse(
+                product.id(),
                 product.name(),
                 product.description(),
                 product.price()
