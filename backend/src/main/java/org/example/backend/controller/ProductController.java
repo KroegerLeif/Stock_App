@@ -2,6 +2,7 @@ package org.example.backend.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.backend.dto.ProductResponse;
+import org.example.backend.mapper.ProductMapper;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.service.ProductService;
@@ -21,6 +22,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final SearchService searchService;
+    private final ProductMapper productMapper;
 
     @GetMapping
     public List<Product> getAll() {
@@ -57,19 +59,12 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductResponse findProductById(@PathVariable String id) {
-        return mapProductToResponse(searchService.findProductById(id));
+        return productMapper.mapProductToResponse(searchService.findProductById(id));
     }
 
     @GetMapping("/search/{search}")
     public ProductResponse searchForProduct(@PathVariable String search) {
-        return mapProductToResponse(searchService.findProduct(search));
+        return productMapper.mapProductToResponse(searchService.findProduct(search));
     }
 
-    private ProductResponse mapProductToResponse(Product product) {
-        return new ProductResponse(
-                product.name(),
-                product.description(),
-                product.price()
-        );
-    }
 }
