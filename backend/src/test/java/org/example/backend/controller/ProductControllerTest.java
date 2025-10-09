@@ -1,6 +1,5 @@
 package org.example.backend.controller;
 
-import org.example.backend.dto.ProductResponse;
 import org.example.backend.model.Product;
 import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
