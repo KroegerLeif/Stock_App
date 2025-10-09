@@ -22,7 +22,7 @@ function DetailProductPage(){
     if(name === ""){
         return (
 
-                <div className="detail-product-loading">
+                <div className="detail-product">
                     <h1>Loading...</h1>
                 </div>
 
@@ -33,8 +33,8 @@ function DetailProductPage(){
 
                 <div className="detail-product">
                     <h1 className={"product-name"}>{name}</h1>
-                    <p className={"product-description"}>{descripiton}</p>
-                    <p className={"product-price"}>{price}</p>
+                    <p className={"product-description"}>Beschreibung: {descripiton}</p>
+                    <p className={"product-price"}>Der Preis: {price}€</p>
                 </div>
 
         )

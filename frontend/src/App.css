@@ -154,4 +154,14 @@ label {
     margin-top: 5px;
 }
 
+.detail-product{
+    background-color: #9b59b6;
+    width: 70%;
+    margin: 0 auto;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+}
