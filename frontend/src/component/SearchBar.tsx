@@ -31,7 +31,7 @@ function SearchBar(){
     }
 
     return (
-        <div>
+        <div className={"search-container"}>
             <form className={"search-bar"} onSubmit={submitSearchForm}>
                     <input type={"text"}
                            placeholder={"Search for Product"}
@@ -40,7 +40,7 @@ function SearchBar(){
                     />
                     <button type={"submit"}>Search</button>
             </form>
-            <div>
+            <div className={"search-results"}>
                 {searchResults.map(product => (
                     <div key={product.id} onClick={() => handleResultClick(product.id)} style={{cursor: 'pointer', padding: '5px', borderBottom: '1px solid #ccc'}}>
                         <p>{product.name}</p>
