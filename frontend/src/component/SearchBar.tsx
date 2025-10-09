@@ -12,26 +12,35 @@ interface Product {
 function SearchBar(){
 
     const [searchValue, setSearchValue] = useState("");
-    const [searchResults, setSearchResults] = useState<Product[]>([]);
+    const [searchResults, setSearchResults] = useState<Product[] | null>(null);
     const nav = useNavigate()
 
     function submitSearchForm(event: React.FormEvent){
         event.preventDefault();
+
+        if (!searchValue.trim()) {
+            setSearchResults(null);
+            return;
+        }
+
         axios.get("/api/products/search/"+searchValue)
             .then(response => {
                 setSearchResults(response.data)
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+                setSearchResults([]);
+            });
     }
 
     function handleResultClick(id: string) {
         setSearchValue("");
-        setSearchResults([]);
+        setSearchResults(null);
         nav("/products/" + id);
     }
 
     return (
-        <div className={"search-container"}>
+        <div>
             <form className={"search-bar"} onSubmit={submitSearchForm}>
                     <input type={"text"}
                            placeholder={"Search for Product"}
@@ -40,13 +49,19 @@ function SearchBar(){
                     />
                     <button type={"submit"}>Search</button>
             </form>
-            <div className={"search-results"}>
-                {searchResults.map(product => (
-                    <div key={product.id} onClick={() => handleResultClick(product.id)} style={{cursor: 'pointer', padding: '5px', borderBottom: '1px solid #ccc'}}>
-                        <p>{product.name}</p>
-                    </div>
-                ))}
-            </div>
+            {searchResults !== null && (
+                <div className={"search-results"}>
+                    {searchResults.length > 0 ? (
+                        searchResults.map(product => (
+                            <div key={product.id} onClick={() => handleResultClick(product.id)} style={{cursor: 'pointer', padding: '5px', borderBottom: '1px solid #ccc'}}>
+                                <p>{product.name}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>Nichts gefunden.</p>
+                    )}
+                </div>
+            )}
         </div>
     )
 }
