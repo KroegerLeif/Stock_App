@@ -51,4 +51,9 @@ public class ProductController {
             return new ResponseEntity<>("Product with id " + id + " was not found", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/{id}")
+    public Product getProduct(@PathVariable String id) {
+        return productService.findProductById(id);
+    }
 }

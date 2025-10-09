@@ -25,6 +25,10 @@ public class ProductService {
         return product;
     }
 
+    public Product findProductById(String id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
     public Product updateProduct(String id, ProductDto productDto) {
         return productRepository.findById(id)
                 .map(existingProduct -> {
