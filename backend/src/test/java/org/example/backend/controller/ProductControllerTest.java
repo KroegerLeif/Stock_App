@@ -2,7 +2,6 @@ package org.example.backend.controller;
 
 import org.example.backend.model.Product;
 import org.example.backend.repository.ProductRepository;
-import org.example.backend.model.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
@@ -58,6 +57,7 @@ class ProductControllerTest {
         assertFalse(productRepository.findById(product.id()).isPresent());
     }
 
+
     @Test
     void test_Product_if_Product_Was_Not_Found_to_Delete() throws Exception {
 
@@ -69,5 +69,35 @@ class ProductControllerTest {
                         .andExpect(status().isNotFound())
                         .andExpect(content().string("Product with id " + product.id() + " was not found"));
 
+    }
+    @Test
+    void updateProduct() throws Exception {
+
+        Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
+        productRepository.save(product);
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/update/{id}" , "1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                  {
+                                    "name" : "Test",
+                                    "description" : "Test",
+                                    "stock" : 10,
+                                    "price" : 4.500
+                                   }
+                                 """)
+                ).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                 
+                                   {
+                                     "id" : "1",
+                                     "name" : "Test",
+                                     "description" : "Test",
+                                     "stock" : 10,
+                                     "price" : 4.500
+                                   }
+                                   
+                                   """
+                ));
     }
 }

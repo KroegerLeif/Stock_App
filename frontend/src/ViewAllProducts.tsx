@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import DeleteButton from "./DeleteButton.tsx";
 import type {Product} from "./Product.ts";
+import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
 export default function ViewAllProducts() {
@@ -25,11 +26,14 @@ export default function ViewAllProducts() {
                     <p>Keine Produkte gefunden.</p>
                 ) : (
                     productsList.map((char) => (
-                        <div key={char.id} className="todo-item">
-                            <h3>ID: {char.id}</h3>
+                        <div key={char.id} className="product-item">
                             <p><strong>Name:</strong> {char.name}</p>
-                            <p><strong>Description:</strong> {char.description}</p>
-                            <p><strong>price:</strong> {char.price}</p>
+                            <p><strong>Beschreibung:</strong> {char.description}</p>
+                            <p><strong>Lagerbestand:</strong> {char.stock}</p>
+                            <p><strong>Preis:</strong> {char.price} €</p>
+                            <Link to={`/edit/${char.id}`}>
+                                <button>Edit</button>
+                            </Link>
                             <DeleteButton productId={char.id} onDeleted={() => setProductsList(productsList.filter(product => product.id !== char.id))} />
                         </div>
                     ))
