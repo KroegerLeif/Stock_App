@@ -2,24 +2,24 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-type productPromp = {
-    productName: string;
-    description: string;
-    productPrice: number;
-}
-
 function DetailProductPage(){
 
-    const id = useParams();
-    const [product,setProduct] = useState<productPromp>();
+    const { id } = useParams();
+    const [name,setName] = useState("")
+    const [descripiton, setDescription] = useState("")
+    const [price, setPrice] = useState(0)
 
-    useEffect(()=>{
-        axios.get(`/api/products/${id}`)
-            .then(response => setProduct(response.data))
-            .catch(err => console.log(err));
+    useEffect(()=> {
+        axios.get(`/api/products/${id}`,)
+            .then(res => {
+                setName(res.data.name)
+                setDescription(res.data.description)
+                setPrice(res.data.price)
+            })
+            .catch(err => console.error(err));
     },[id])
 
-    if(!product){
+    if(name === ""){
         return (
 
                 <div className="detail-product-loading">
@@ -32,9 +32,9 @@ function DetailProductPage(){
         return(
 
                 <div className="detail-product">
-                    <h1 className={"product-name"}>{product.productName}</h1>
-                    <p className={"product-description"}>{product.description}</p>
-                    <p className={"product-price"}>{product.productPrice}</p>
+                    <h1 className={"product-name"}>{name}</h1>
+                    <p className={"product-description"}>{descripiton}</p>
+                    <p className={"product-price"}>{price}</p>
                 </div>
 
         )
