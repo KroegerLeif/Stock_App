@@ -5,6 +5,7 @@ import org.example.backend.model.Product;
 import org.example.backend.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -68,67 +69,34 @@ public class SearchServiceTest {
     }
 
     @Test
-    void findProduct_ShouldReturnProduct_whenSearchIsAnId() {
+    void findProduct_ShouldReturnListOfProducts_whenProductsExist() {
         // GIVEN
-        String search = "1";
-        Product expectedProduct = new Product(search, "Test Product", "Test Description", 10, 9.99);
-        when(productRepository.findById(search)).thenReturn(Optional.of(expectedProduct));
+        String search = "Test";
+        List<Product> expectedProducts = List.of(
+                new Product("1", "Test Product 1", "Description 1", 10, 9.99),
+                new Product("2", "Test Product 2", "Description 2", 5, 19.99)
+        );
+        when(productRepository.findByNameContainingIgnoreCase(search)).thenReturn(expectedProducts);
 
         // WHEN
-        Product actualProduct = service.findProduct(search);
+        List<Product> actualProducts = service.findProduct(search);
 
         // THEN
-        verify(productRepository).findById(search);
-        assertEquals(expectedProduct, actualProduct);
+        verify(productRepository).findByNameContainingIgnoreCase(search);
+        assertEquals(expectedProducts, actualProducts);
     }
 
     @Test
-    void findProduct_ShouldReturnProduct_whenSearchIsAnExactName() {
+    void findProduct_ShouldReturnEmptyList_whenNoProductsMatch() {
         // GIVEN
-        String search = "Exact Name";
-        Product expectedProduct = new Product("1", search, "Test Description", 10, 9.99);
-        when(productRepository.findById(search)).thenReturn(Optional.empty());
-        when(productRepository.findByName(search)).thenReturn(Optional.of(expectedProduct));
+        String search = "non-existent";
+        when(productRepository.findByNameContainingIgnoreCase(search)).thenReturn(List.of());
 
         // WHEN
-        Product actualProduct = service.findProduct(search);
+        List<Product> actualProducts = service.findProduct(search);
 
         // THEN
-        verify(productRepository).findById(search);
-        verify(productRepository).findByName(search);
-        assertEquals(expectedProduct, actualProduct);
-    }
-
-    @Test
-    void findProduct_ShouldReturnProduct_whenSearchContainsAValidName() {
-        // GIVEN
-        String search = "some other words and then TestProduct";
-        String expectedName = "TestProduct";
-        Product expectedProduct = new Product("1", expectedName, "Test Description", 10, 9.99);
-        when(productRepository.findById(search)).thenReturn(Optional.empty());
-        when(productRepository.findByName(search)).thenReturn(Optional.empty());
-        when(productRepository.findByName("some")).thenReturn(Optional.empty());
-        when(productRepository.findByName("other")).thenReturn(Optional.empty());
-        when(productRepository.findByName("words")).thenReturn(Optional.empty());
-        when(productRepository.findByName("and")).thenReturn(Optional.empty());
-        when(productRepository.findByName("then")).thenReturn(Optional.empty());
-        when(productRepository.findByName(expectedName)).thenReturn(Optional.of(expectedProduct));
-
-        // WHEN
-        Product actualProduct = service.findProduct(search);
-
-        // THEN
-        assertEquals(expectedProduct, actualProduct);
-    }
-
-    @Test
-    void findProduct_ShouldThrowProductNotFoundException_whenNoProductMatches() {
-        // GIVEN
-        String search = "nothing matches this";
-        when(productRepository.findById(anyString())).thenReturn(Optional.empty());
-        when(productRepository.findByName(anyString())).thenReturn(Optional.empty());
-
-        // WHEN & THEN
-        assertThrows(ProductNotFoundException.class, () -> service.findProduct(search));
+        verify(productRepository).findByNameContainingIgnoreCase(search);
+        assertEquals(0, actualProducts.size());
     }
 }

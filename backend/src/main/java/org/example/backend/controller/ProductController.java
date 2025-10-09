@@ -10,10 +10,10 @@ import org.example.backend.service.SearchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -63,8 +63,10 @@ public class ProductController {
     }
 
     @GetMapping("/search/{search}")
-    public ProductResponse searchForProduct(@PathVariable String search) {
-        return productMapper.mapProductToResponse(searchService.findProduct(search));
+    public List<ProductResponse> searchForProduct(@PathVariable String search) {
+        return searchService.findProduct(search).stream()
+                .map(productMapper::mapProductToResponse)
+                .collect(Collectors.toList());
     }
 
 }

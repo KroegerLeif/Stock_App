@@ -138,18 +138,22 @@ class ProductControllerTest {
         mockMvc.perform(get("/api/products/search/{search}", "Test"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                    {
-                        "id": "1",
-                        "name": "Test",
-                        "description": "Test",
-                        "price": 4.500
-                    }"""));
+                    [
+                        {
+                            "id": "1",
+                            "name": "Test",
+                            "description": "Test",
+                            "price": 4.500
+                        }
+                    ]
+                """));
     }
 
     @Test
-    void searchForProduct_ShouldReturnNotFound_whenProductDoesNotExist() throws Exception {
+    void searchForProduct_ShouldReturnEmptyList_whenProductDoesNotExist() throws Exception {
         mockMvc.perform(get("/api/products/search/{search}", "non-existent-name"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
     }
 
 }
