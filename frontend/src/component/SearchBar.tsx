@@ -53,7 +53,18 @@ function SearchBar(){
                 <div className={"search-results"}>
                     {searchResults.length > 0 ? (
                         searchResults.map(product => (
-                            <div key={product.id} onClick={() => handleResultClick(product.id)} style={{cursor: 'pointer', padding: '5px', borderBottom: '1px solid #ccc'}}>
+                            <div
+                                key={product.id}
+                                onClick={() => handleResultClick(product.id)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleResultClick(product.id);
+                                    }
+                                }}
+                                tabIndex={0}
+                                role="button"
+                                style={{cursor: 'pointer', padding: '5px', borderBottom: '1px solid #ccc'}}
+                            >
                                 <p>{product.name}</p>
                             </div>
                         ))
