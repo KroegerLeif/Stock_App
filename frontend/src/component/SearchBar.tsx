@@ -1,41 +1,53 @@
-import {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+
+interface Product {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+}
 
 function SearchBar(){
 
     const [searchValue, setSearchValue] = useState("");
-    const [searchResult, setSearchResult] = useState({
-        id: "",
-        name: "",
-        description: "",
-        price: 0
-    });
+    const [searchResults, setSearchResults] = useState<Product[]>([]);
     const nav = useNavigate()
 
-    function sumbitSearchForm(){
+    function submitSearchForm(event: React.FormEvent){
+        event.preventDefault();
         axios.get("/api/products/search/"+searchValue)
-            .then(response => setSearchResult(response.data))
+            .then(response => {
+                setSearchResults(response.data)
+            })
             .catch(err => console.log(err));
-
-
     }
 
-    useEffect(() => {
+    function handleResultClick(id: string) {
         setSearchValue("");
-        nav("/products/" + searchResult.id)
-    },[searchResult])
+        setSearchResults([]);
+        nav("/products/" + id);
+    }
 
     return (
-        <form className={"search-bar"} onSubmit={sumbitSearchForm}>
-                <input type={"text"}
-                       placeholder={"Search for Product"}
-                    value={searchValue}
-                    onChange={event => setSearchValue(event.target.value)}
-                />
-                <button type={"submit"}>Search</button>
-
-        </form>
+        <div>
+            <form className={"search-bar"} onSubmit={submitSearchForm}>
+                    <input type={"text"}
+                           placeholder={"Search for Product"}
+                        value={searchValue}
+                        onChange={event => setSearchValue(event.target.value)}
+                    />
+                    <button type={"submit"}>Search</button>
+            </form>
+            <div>
+                {searchResults.map(product => (
+                    <div key={product.id} onClick={() => handleResultClick(product.id)} style={{cursor: 'pointer', padding: '5px', borderBottom: '1px solid #ccc'}}>
+                        <p>{product.name}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
     )
 }
 
