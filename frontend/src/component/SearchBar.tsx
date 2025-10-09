@@ -40,7 +40,7 @@ function SearchBar(){
     }
 
     return (
-        <div>
+        <div className={"search-container"}>
             <form className={"search-bar"} onSubmit={submitSearchForm}>
                     <input type={"text"}
                            placeholder={"Search for Product"}
