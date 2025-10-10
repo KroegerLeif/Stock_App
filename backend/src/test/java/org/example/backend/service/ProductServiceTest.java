@@ -1,5 +1,6 @@
 package org.example.backend.service;
 
+import org.example.backend.expetion.ProductNotFoundException;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.repository.ProductRepository;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class ProductServiceTest {
 
@@ -62,4 +64,5 @@ class ProductServiceTest {
         verify(productRepository).findById(id);
         verify(productRepository).deleteById(id);
     }
+
 }
