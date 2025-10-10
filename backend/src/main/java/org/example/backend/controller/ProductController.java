@@ -1,16 +1,19 @@
 package org.example.backend.controller;
 
 import lombok.AllArgsConstructor;
+import org.example.backend.dto.ProductResponse;
+import org.example.backend.mapper.ProductMapper;
 import org.example.backend.model.Product;
 import org.example.backend.model.ProductDto;
 import org.example.backend.service.ProductService;
+import org.example.backend.service.SearchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -18,6 +21,8 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final SearchService searchService;
+    private final ProductMapper productMapper;
 
     @GetMapping
     public List<Product> getAll() {
@@ -51,4 +56,17 @@ public class ProductController {
             return new ResponseEntity<>("Product with id " + id + " was not found", HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/{id}")
+    public ProductResponse findProductById(@PathVariable String id) {
+        return productMapper.mapProductToResponse(searchService.findProductById(id));
+    }
+
+    @GetMapping("/search/{search}")
+    public List<ProductResponse> searchForProduct(@PathVariable String search) {
+        return searchService.findProduct(search).stream()
+                .map(productMapper::mapProductToResponse)
+                .collect(Collectors.toList());
+    }
+
 }
