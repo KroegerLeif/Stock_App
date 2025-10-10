@@ -6,9 +6,7 @@ function MenuBar(){
     return(
         <div className={"menu-bar"}>
             <nav>
-                <Link to={"/"}>Home</Link>
-                <Link to={"/products/add"}>Add Product</Link>
-                <Link to={"/"}>View All Products</Link>
+                <Link to={"/"}>Warehouse Management</Link>
             </nav>
             <SearchBar/>
         </div>

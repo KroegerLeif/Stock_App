@@ -29,8 +29,6 @@ form label {
 input, select, textarea {
     width: 100%;
     padding: 8px;
-    margin-top: 4px;
-    margin-bottom: 15px;
     border-radius: 5px;
     border: none;
 }
@@ -93,16 +91,10 @@ tr {
     align-items: baseline;
 }
 
-.menu-bar nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-grow: 2;
-}
-
 .menu-bar nav a {
-    color: black;
-    font-size: 1.5em;
+    color: #573365;
+    font-size: 1.5rem;
+    margin-right: 15px;
 }
 
 .search-container{
@@ -119,6 +111,15 @@ tr {
 .search-bar input {
     flex-grow: 1;
     margin-right: 10px;
+}
+
+.product-form {
+    width: 50%;
+}
+
+.product-form input, .product-form textarea {
+    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .search-results{

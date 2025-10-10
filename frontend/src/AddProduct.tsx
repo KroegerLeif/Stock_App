@@ -50,7 +50,7 @@ export default function AddProduct() {
             <button onClick={() => navigate("/")}>Zurück</button>
             <div className="container">
                 <h2>Neues Produkt anlegen</h2>
-                <form onSubmit={handelSubmit}>
+                <form className={"product-form"} onSubmit={handelSubmit}>
                     <label htmlFor="name">Name:</label>
                     <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"/>
 
@@ -66,7 +66,7 @@ export default function AddProduct() {
                     <label htmlFor="price">Preis:</label>
                     <input id="price" value={product.price} onChange={handelInputChange} name={"price"} type="number"/>
 
-                    <button type="submit">speichern</button>
+                    <button type="submit">Speichern</button>
 
                 </form>
             </div>

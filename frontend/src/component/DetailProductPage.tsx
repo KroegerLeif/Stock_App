@@ -33,8 +33,8 @@ function DetailProductPage(){
 
                 <div className="detail-product">
                     <h1 className={"product-name"}>{name}</h1>
-                    <p className={"product-description"}>Beschreibung: {descripiton}</p>
-                    <p className={"product-price"}>Der Preis: {price}€</p>
+                    <p className={"product-description"}>{descripiton}</p>
+                    <p className={"product-price"}>Preis: {price} €</p>
                 </div>
 
         )

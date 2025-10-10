@@ -44,7 +44,7 @@ export default function UpdateProduct() {
             <button onClick={() => navigate("/")}>Zurück</button>
             <div className="container">
                 <h2>Produkt bearbeiten</h2>
-                <form onSubmit={updateProduct}>
+                <form className={"product-form"} onSubmit={updateProduct}>
                     <label>Name:
                         <input value={name} onChange={(e) => setName(e.target.value)}/>
                     </label>
