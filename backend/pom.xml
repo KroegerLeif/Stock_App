@@ -65,6 +65,7 @@
     </dependencies>
 
     <build>
+        <finalName>Stock_App</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>

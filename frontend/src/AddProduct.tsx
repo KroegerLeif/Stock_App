@@ -42,10 +42,10 @@ export default function AddProduct() {
             <form onSubmit={handelSubmit}>
 
                 <label htmlFor="name">Name:</label>
-                <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"/>
+                <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text" required/>
 
                 <label htmlFor="description">Beschreibung:</label>
-                <input id="description" value={product.description} onChange={handelInputChange} name={"description"} type="text"/>
+                <input id="description" value={product.description} onChange={handelInputChange} name={"description"} type="text" required/>
 
                 <label htmlFor="stock">Lagerbestand:</label>
                 <input id="stock" value={product.stock} onChange={handelInputChange} name={"stock"} type="number"/>
