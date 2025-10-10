@@ -25,18 +25,34 @@ export default function ViewAllProducts() {
                 {productsList.length === 0 ? (
                     <p>Keine Produkte gefunden.</p>
                 ) : (
-                    productsList.map((char) => (
-                        <div key={char.id} className="product-item">
-                            <p><strong>Name:</strong> {char.name}</p>
-                            <p><strong>Beschreibung:</strong> {char.description}</p>
-                            <p><strong>Lagerbestand:</strong> {char.stock}</p>
-                            <p><strong>Preis:</strong> {char.price} €</p>
-                            <Link to={`/edit/${char.id}`}>
-                                <button>Edit</button>
-                            </Link>
-                            <DeleteButton productId={char.id} onDeleted={() => setProductsList(productsList.filter(product => product.id !== char.id))} />
-                        </div>
-                    ))
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Lagerbestand</th>
+                            <th>Preis €</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {productsList.map((char) => (
+                            <tr key={char.id}>
+                                <td width={"30%"}>{char.name}</td>
+                                <td>{char.stock}</td>
+                                <td>{char.price} </td>
+                                <td  align={"right"}><Link to={`/edit/${char.id}`}>
+                                    <button>Bearbeiten</button>
+                                </Link>
+                                    <DeleteButton productId={char.id}
+                                                  onDeleted={() =>
+                                                      setProductsList(productsList
+                                                          .filter(product => product.id !== char.id))}/>
+                                </td>
+                            </tr>
+                        ))
+                        }
+                        </tbody>
+                    </table>
                 )}
             </div>
         </>

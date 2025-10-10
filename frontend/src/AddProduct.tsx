@@ -18,7 +18,7 @@ export default function AddProduct() {
     function postProduct(product: Product) {
         axios.post("/api/products", product)
             .then(() => {
-                navigate("/")
+                    navigate("/")
                 }
             )
             .catch((error) => console.log(error))
@@ -37,25 +37,39 @@ export default function AddProduct() {
         })
     }
 
+    function handelTextAreaChange(e: ChangeEvent<HTMLTextAreaElement>) {
+        const {name, value} = e.target;
+        setProduct({
+            ...product,
+            [name]: value
+        })
+    }
+
     return (
-        <div className="container">
-            <form onSubmit={handelSubmit}>
+        <>
+            <button onClick={() => navigate("/")}>Zurück</button>
+            <div className="container">
+                <h2>Neues Produkt anlegen</h2>
+                <form className={"product-form"} onSubmit={handelSubmit}>
+                    <label htmlFor="name">Name:</label>
+                    <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"/>
 
-                <label htmlFor="name">Name:</label>
-                <input id="name" value={product.name} onChange={handelInputChange} name={"name"} type="text"/>
+                    <label htmlFor="description">Beschreibung:</label>
+                    <textarea id="description" value={product.description} onChange={handelTextAreaChange}
+                              name={"description"} rows={4} cols={40}>
+                    {product.description}
+                </textarea>
 
-                <label htmlFor="description">Beschreibung:</label>
-                <input id="description" value={product.description} onChange={handelInputChange} name={"description"} type="text"/>
+                    <label htmlFor="stock">Lagerbestand:</label>
+                    <input id="stock" value={product.stock} onChange={handelInputChange} name={"stock"} type="number"/>
 
-                <label htmlFor="stock">Lagerbestand:</label>
-                <input id="stock" value={product.stock} onChange={handelInputChange} name={"stock"} type="number"/>
+                    <label htmlFor="price">Preis:</label>
+                    <input id="price" value={product.price} onChange={handelInputChange} name={"price"} type="number"/>
 
-                <label htmlFor="price">Preis:</label>
-                <input id="price" value={product.price} onChange={handelInputChange} name={"price"} type="number"/>
+                    <button type="submit">Speichern</button>
 
-                <button type="submit">speichern</button>
-
-            </form>
-        </div>
+                </form>
+            </div>
+        </>
     );
 }

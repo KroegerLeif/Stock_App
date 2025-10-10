@@ -43,11 +43,11 @@ function SearchBar(){
         <div className={"search-container"}>
             <form className={"search-bar"} onSubmit={submitSearchForm}>
                     <input type={"text"}
-                           placeholder={"Search for Product"}
+                           placeholder={"Was suchst du?"}
                         value={searchValue}
                         onChange={event => setSearchValue(event.target.value)}
                     />
-                    <button type={"submit"}>Search</button>
+                    <button type={"submit"}>Suchen</button>
             </form>
             {searchResults !== null && (
                 <div className={"search-results"}>
