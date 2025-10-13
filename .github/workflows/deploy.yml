@@ -36,7 +36,7 @@ jobs:
           path: backend/src/main/resources/static
 
       - name: Setup JDK
-      - uses: actions/setup-java@v4
+        uses: actions/setup-java@v4
         with:
           java-version: "21"
           distribution: "temurin"
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: stock_app.jar
-          path: backend/target/Sock_App.jar
+          path: backend/target/Stock_App.jar
 
 
   push-to-docker-hub:
