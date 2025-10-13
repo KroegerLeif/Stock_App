@@ -26,6 +26,7 @@ jobs:
           path: frontend/dist/
 
   build-backend:
+    needs: build-frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -52,6 +53,7 @@ jobs:
 
 
   push-to-docker-hub:
+    needs: build-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
