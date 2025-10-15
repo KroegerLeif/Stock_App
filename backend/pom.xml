@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.example</groupId>
     <artifactId>backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>backend</name>
     <description>backend</description>
     <url/>
@@ -83,7 +83,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version> <!-- Aktuelle Version prüfen -->
+                <version>0.8.13</version> <!-- Aktuelle Version prüfen -->
                 <executions>
                     <execution>
                         <goals>
