@@ -43,7 +43,7 @@ function SearchBar(){
         <div className={"search-container"}>
             <form className={"search-bar"} onSubmit={submitSearchForm}>
                     <input type={"text"}
-                           placeholder={"Was suchst du?"}
+                           placeholder={"Was suchst Du?"}
                         value={searchValue}
                         onChange={event => setSearchValue(event.target.value)}
                     />

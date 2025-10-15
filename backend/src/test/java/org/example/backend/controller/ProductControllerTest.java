@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockR
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -30,6 +31,7 @@ class ProductControllerTest {
     private ProductRepository productRepository;
 
     @Test
+    @WithMockUser
     void addProduct() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -46,6 +48,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser
     void test_Product_if_Was_Deleted_Successful() throws Exception {
 
         Product product = new Product("12345", "Name", "Description", 10, 9.99);
@@ -60,6 +63,7 @@ class ProductControllerTest {
 
 
     @Test
+    @WithMockUser
     void test_Product_if_Product_Was_Not_Found_to_Delete() throws Exception {
 
         //Product created, but not added to database
@@ -72,6 +76,7 @@ class ProductControllerTest {
 
     }
     @Test
+    @WithMockUser
     void updateProduct() throws Exception {
 
         Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
@@ -103,6 +108,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findProductById_ShouldReturnProduct_whenProductExists() throws Exception {
         //GIVEN
         Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
@@ -122,12 +128,14 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser
     void findProductById_ShouldReturnNotFound_whenProductDoesNotExist() throws Exception {
         mockMvc.perform(get("/api/products/{id}", "non-existent-id"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
+    @WithMockUser
     void searchForProduct_ShouldReturnProduct_whenProductExists() throws Exception {
         //GIVEN
         Product product = new Product("1" , "Test" , "Test" , 5 , 4.500);
@@ -149,6 +157,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser
     void searchForProduct_ShouldReturnEmptyList_whenProductDoesNotExist() throws Exception {
         mockMvc.perform(get("/api/products/search/{search}", "non-existent-name"))
                 .andExpect(status().isOk())

@@ -33,7 +33,7 @@ export default function UpdateProduct() {
         })
             .then(() => {
                 setMessage("Produkt erfolgreich aktualisiert")
-                setTimeout(() => navigate("/"), 1500);
+                setTimeout(() => navigate("/products"), 1500);
             })
             .catch(() =>
                 setMessage("Fehler beim Aktualisieren"))
@@ -41,7 +41,7 @@ export default function UpdateProduct() {
 
     return (
         <>
-            <button onClick={() => navigate("/")}>Zurück</button>
+            <button onClick={() => navigate("/products")}>Zurück</button>
             <div className="container">
                 <h2>Produkt bearbeiten</h2>
                 <form className={"product-form"} onSubmit={updateProduct}>

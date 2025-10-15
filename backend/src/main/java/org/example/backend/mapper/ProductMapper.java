@@ -11,6 +11,7 @@ public class ProductMapper {
                 product.id(),
                 product.name(),
                 product.description(),
+                product.stock(),
                 product.price()
         );
     }

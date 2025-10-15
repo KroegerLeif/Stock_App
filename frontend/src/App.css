@@ -143,3 +143,8 @@ tr {
     align-items: center;
 
 }
+
+.d-flex-right {
+    display: flex;
+    justify-content: flex-end;
+}
