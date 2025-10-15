@@ -31,7 +31,7 @@ function App() {
             .then(response => {
                 setUser(response.data)
             })
-            .catch(error => setUser(null))
+            .catch(() => setUser(null))
     }
 
     useEffect(() => {

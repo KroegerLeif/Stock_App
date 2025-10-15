@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom";
-import SearchBar from "./SearchBar.tsx";
 
 function MenuBar(){
 

@@ -23,9 +23,9 @@ public class SecurityConfig {
                 )
                 .exceptionHandling(exceptionHandlingConfigurer ->
                         exceptionHandlingConfigurer.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-                .logout(l -> l.logoutSuccessUrl("http://localhost:5173"))
+                .logout(l -> l.logoutSuccessUrl("/"))
                 .oauth2Login(o -> o
-                        .defaultSuccessUrl("http://localhost:5173/products"));
+                        .defaultSuccessUrl("/products"));
         return http.build();
     }
 }
