@@ -18,7 +18,7 @@ export default function AddProduct() {
     function postProduct(product: Product) {
         axios.post("/api/products", product)
             .then(() => {
-                    navigate("/")
+                    navigate("/products")
                 }
             )
             .catch((error) => console.log(error))
@@ -47,7 +47,7 @@ export default function AddProduct() {
 
     return (
         <>
-            <button onClick={() => navigate("/")}>Zurück</button>
+            <button onClick={() => navigate("/products")}>Zurück</button>
             <div className="container">
                 <h2>Neues Produkt anlegen</h2>
                 <form className={"product-form"} onSubmit={handelSubmit}>

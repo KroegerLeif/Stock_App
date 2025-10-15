@@ -4,6 +4,7 @@ import DeleteButton from "./DeleteButton.tsx";
 import type {Product} from "./Product.ts";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import SearchBar from "./component/SearchBar.tsx";
 
 export default function ViewAllProducts() {
 
@@ -19,6 +20,7 @@ export default function ViewAllProducts() {
 
     return (
         <>
+            <SearchBar/>
             <button onClick={() => navigate("/products/add")}>Produkt anlegen</button>
             <div className="container">
                 <h1>Produkte Liste</h1>
